@@ -1,3 +1,40 @@
+const amenities = [
+    "TV", // essentials
+    "Wifi",
+    "Air conditioning",
+    "Pool",
+    "Kitchen",
+    "Elevator",
+    "Heating",
+    "Washer",
+    "Dryer",
+    "Shampoo",
+    "Hangers",
+    "Hair dryer",
+    "Iron",
+    "Smoke detector", // safety
+    "Carbon monoxide detector", //safety
+    "First aid kit", // safety
+    "Fire extinguisher", // safety
+    "Laptop friendly workspace", // features
+    "Self check-in",
+    "Building staff",
+    "Gym",
+    "Private living room",
+    "Microwave",
+    "Coffee maker",
+    "Refrigerator",
+    "Cooking basics",
+    "Oven",
+    "Stove",
+    "Patio or balcony",
+    "Cleaning before checkout",
+    "Step-free access", // accessibility 
+    "Flat path to front door", // accessibility
+    "Well-lit path to entrance", // accessibility
+    "Step-free access" // accessibility
+]
+
 const listings = [
     {
         "_id": "10096773",
@@ -2306,4 +2343,4 @@ const listings = [
         ]
     }
 ]
-export { listings };
+export { amenities };

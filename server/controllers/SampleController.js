@@ -19,14 +19,15 @@ const getAllListings = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 12;
         const pageNo = parseInt(req.query.pageNo) || 1;
+        const cost = req.query.cost || Infinity;
         // const minPrice = req.query.minPrice || -Infinity;
         // const maxPrice = req.query.maxPrice || Infinity;
         const skip = pageNo > 1 ? ((pageNo - 1) * limit) : 0;
         const client = await dbConnection.getDb();
         const db = client.db("sample_airbnb");
         const collection = db.collection("listingsAndReviews");
-        const count = await collection.estimatedDocumentCount({ price: { $lte: Decimal128(`${req.query.cost}`) } });
-        const listings = await collection.find({ price: { $lte: Decimal128(`${req.query.cost}`) } }).skip(skip).limit(limit).toArray();
+        const count = await collection.estimatedDocumentCount({ price: { $lte: Decimal128(`${cost}`) } });
+        const listings = await collection.find({ price: { $lte: Decimal128(`${cost}`) } }).skip(skip).limit(limit).toArray();
         const pageCount = count / limit;
         // const [resCount, resListings] = await collection.find({ $all: [count, listings] });
         // const pageCount = resCount / limit;

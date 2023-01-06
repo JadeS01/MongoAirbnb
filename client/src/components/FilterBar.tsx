@@ -1,11 +1,17 @@
 import { useState } from "react";
+import { BsFilterCircle } from "react-icons/bs";
+import { FilterModal } from "./FilterModal";
+import IFilters from "./interfaces/IFilters";
 
 interface Props {
     listingsCount?: number,
-    getFilters: (args: any) => void
+    filters?: IFilters,
+    getFiltersData: (args: IFilters) => void
 }
-const FilterBar = (props: Props) => {
-    const [input, setInput] = useState<string>("");
+const FilterBar = (props: Props): JSX.Element => {
+    // const [input, setInput] = useState<string>("");
+    const [openFilterModal, setOpenFilterModal] = useState<boolean>(false);
+
     return (
         <div className='max-w-md mx-auto'>
             <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
@@ -18,9 +24,14 @@ const FilterBar = (props: Props) => {
                 <input
                     className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
                     type="text"
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={(e) => props.getFiltersData({ ...props.filters, address: e.target.value })}
                     placeholder="Search" />
+                <button className="bg-red-200" onClick={() => setOpenFilterModal(true)}>
+                    <BsFilterCircle />
+                    Filters
+                </button>
             </div>
+            {openFilterModal && <FilterModal close={() => setOpenFilterModal(false)} filters={props.filters} getFiltersData={props.getFiltersData} />}
         </div>
     )
 }
